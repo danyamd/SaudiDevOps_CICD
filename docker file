@@ -1,7 +1,12 @@
-        dockerRun = "docker run -p 8000:80 -d --name cloudmu  danyamd/saudidevops_cicd:latest"
-5	        dockerrm = "docker container rm -f cloudmu"
-6	        dockerimagerm = "docker image rmi  danyamd/saudidevops_cicd"
-7	    }
-8	        
-9	
-10	    stages {
+FROM centos:latest
+MAINTAINER Danyaaldossary@gmail.com
+RUN yum install -y httpd \
+  zip \ 
+ unzip
+ ADD https://www.free-css.com/assets/files/free-css-templates/download/page258/loxury.zip /var/www/html/
+ WORKDIR /var/www/html
+ RUN unzip loxury.zip
+ RUN cp -rvf loxury/*
+ RUN rm -rf loxury loxury.zip
+ CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
+ EXPOSE 80
